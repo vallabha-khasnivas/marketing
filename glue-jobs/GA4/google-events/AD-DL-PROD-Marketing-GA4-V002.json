@@ -1,0 +1,51 @@
+{
+  "name" : "AD-DL-PROD-Marketing-GA4-V002",
+  "jobMode" : "SCRIPT",
+  "description" : "",
+  "role" : "arn:aws:iam::167042988732:role/AD-DL-Prod-ARS-Glue",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 10
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-167042988732-us-east-1/scripts/AD-DL-PROD-Marketing-GA4-V002.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--connectionName" : "bigquery",
+    "--enable-glue-datacatalog" : "true",
+    "--property_id" : "355089312",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--timedelta_days" : "2",
+    "--TempDir" : "s3://aws-glue-assets-167042988732-us-east-1/temporary/",
+    "--enable-metrics" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-167042988732-us-east-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "true",
+    "--enable-observability-metrics" : "true",
+    "--parentProject" : "ultra-unfolding-415808",
+    "--conf" : "spark.eventLog.rolling.enabled=true --conf spark.sql.catalog.glue_catalog.glue.skip-name-validation=true",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--job-language" : "python",
+    "--table" : "analytics_355089312.events",
+    "--property_name" : "theclubairportlounges",
+    "--databucket" : "ga4",
+    "--gluetablename" : "raw"
+  },
+  "connections" : {
+    "connections" : [ "Jdbc connection" ]
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 10,
+  "timeout" : 60,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "5.1",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "marketing",
+    "branch" : "main",
+    "folder" : "glue-jobs/GA4/google-events"
+  }
+}
