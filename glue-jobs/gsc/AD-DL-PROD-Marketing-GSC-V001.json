@@ -1,0 +1,42 @@
+{
+  "name" : "AD-DL-PROD-Marketing-GSC-V001",
+  "jobMode" : "SCRIPT",
+  "description" : "",
+  "role" : "arn:aws:iam::167042988732:role/AD-DL-Prod-ARS-Glue",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-167042988732-us-east-1/scripts/AD-DL-PROD-Marketing-GSC-V001.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-167042988732-us-east-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "true",
+    "--additional-python-modules" : "google-cloud-bigquery==3.25.0,google-auth==2.29.0,db-dtypes==1.2.0",
+    "--enable-observability-metrics" : "true",
+    "--enable-glue-datacatalog" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-167042988732-us-east-1/temporary/"
+  },
+  "connections" : {
+    "connections" : [ "Glue-ETL-ARS-S3" ]
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 2,
+  "timeout" : 60,
+  "maxCapacity" : 2.0,
+  "glueVersion" : "3.0",
+  "numberOfWorkers" : 2,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "marketing",
+    "branch" : "main",
+    "folder" : "glue-jobs/gsc"
+  }
+}
